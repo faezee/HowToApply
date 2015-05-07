@@ -1,0 +1,16 @@
+
+<div>
+  <p>
+    <%= post.content %>
+    
+  <span>
+  	
+  </span>
+    in <%=timeago_tag post.created_at , :nojs => true, :limit => 10.days.ago%>
+
+  <span> <%= link_to 'reply', new_post_path(:parent_id => post) %> </span> |
+  <span> <%= link_to 'delete', post, method: :delete, data: { confirm: 'Are you sure?' } %> </span>
+
+
+  </p>
+</div>

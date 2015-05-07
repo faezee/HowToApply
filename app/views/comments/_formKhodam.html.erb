@@ -1,0 +1,19 @@
+
+<!-- vase new kardan miad inja !! -->
+
+<%= form_for([@post, @post.comments.build]) do |f| %>
+  <p>
+    <%= f.label :tetx %><br>
+    <%= f.text_field :text %>
+  </p>
+  
+  <p>
+  	<% f.label :post_id %><br>
+    <%= f.hidden_field :post_id  , :value => @post.id %>
+  </p>
+
+  <p>
+    <%= f.submit %>
+  </p>
+<% end %>
+

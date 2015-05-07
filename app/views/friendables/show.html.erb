@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>From:</strong>
+  <%= @friendable.from_id %>
+</p>
+
+<p>
+  <strong>To:</strong>
+  <%= @friendable.to_id %>
+</p>
+
+<p>
+  <strong>Accepted:</strong>
+  <%= @friendable.accepted %>
+</p>
+
+<%= link_to 'Edit', edit_friendable_path(@friendable) %> |
+<%= link_to 'Back', friendables_path %>

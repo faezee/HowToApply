@@ -1,0 +1,34 @@
+
+<p>
+  <strong>Text:</strong>
+  <%= @comment.text %>
+</p>
+
+<p>
+  <strong>Post:</strong>
+  <%= @comment.post %>
+</p>
+
+<p>
+  <strong>Profile:</strong>
+  <%= @comment.profile %>
+</p>
+
+<p>
+  <strong>Profile name :</strong>
+  <%= @comment.profile.name %>
+</p>
+
+<p>
+  <strong>Profile name :</strong>
+  <%= @comment.post.content %>
+</p>
+
+<%= link_to 'Edit', edit_comment_path(@comment) %> |
+<%= link_to 'Back', comments_path %>
+
+<p>
+  <%= link_to 'Destroy Comment', [comment.post, comment],
+               method: :delete,
+               data: { confirm: 'Are you sure?' } %>
+</p>

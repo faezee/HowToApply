@@ -1,0 +1,16 @@
+// Place all the styles related to the posts controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+
+
+.nested_posts{
+  margin-left: 35px;
+    margin: 13px;
+  background: oldlace;
+
+}
+
+.nested_posts .nested_posts .nested_posts .nested_posts{
+  margin-left: 0;
+}

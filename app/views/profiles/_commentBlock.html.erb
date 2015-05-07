@@ -1,0 +1,26 @@
+
+<li>
+    <div class="media">
+        <a href="" class="pull-left">
+            <img src="/assets/woman-5.jpg" class="media-object">
+                </a>
+            <div class="media-body">
+                <a href="" class="comment-author"> <%=comment.profile.name%> </a>
+                <span><%=comment.text%></span>
+            	<div class="comment-date"><%= time_ago_in_words(comment.created_at) %></div>
+            </div>
+    </div>
+</li>
+<!-- <li>
+    <div class="media">
+        <a href="" class="pull-left">
+            <img src="/assets/guy-5.jpg" class="media-object">
+                </a>
+            <div class="media-body">
+                <a href="" class="comment-author">Bill D.</a>
+                <span>What time did it finish?</span>
+                <div class="comment-date">14 min</div>
+            </div>
+    </div>
+</li> -->
+    

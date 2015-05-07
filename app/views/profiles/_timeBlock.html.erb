@@ -1,0 +1,49 @@
+
+
+<div class="timeline-block">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <div class="media">
+                            <a href="" class="pull-left">
+                                <img src="/assets/guy-2.jpg" class="media-object">
+                            </a>
+                            <div class="media-body">
+                                <a href="#" class="pull-right text-muted"><i class="icon-reply-all-fill fa fa-2x "></i></a>
+                                <a href=""><%= post.user.profile.name %></a>
+                                <span><%= time_ago_in_words(post.created_at) %></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel-body">
+                        <p>    <%= post.content %> _  </p>
+                        <p>    <%= post.user.profile.name %> _ </p>
+                               <%= post.user.profile.familyName %> 
+                        <p>    <%= post.user.email %> _ </p>
+                        <p>    <%= post.created_at %> _ </p>
+                        <p>    <%= time_ago_in_words(post.created_at) %> </p>
+                    </div>
+                    <div class="view-all-comments"><a href="#"><i class="fa fa-comments-o"></i> View all</a> <%= post.comments.count %> comments </div>
+                    <ul class="comments">
+
+                         <% post.comments.each do |comment| %>
+                            <%#= render :partial => 'profiles/timeBlock', :object => post %>
+                            <%= render :partial => "commentBlock", :locals => {:comment => comment} %>
+                        <% end if post.present? %>
+
+                        <%= form_tag("/comments") do  %>
+                        <%= hidden_field_tag 'post_id' , post.id %>
+                        <li class="comment-form">
+                            <div class="input-group">
+                                    <%#= form_tag("/comments") do  %>
+                                    <input type="text"  name="comment[text]"  class="form-control" />
+                                    <span class="input-group-addon">
+                                        <!-- <a href=""><i class="fa fa-photo"></i></a> -->
+                                         <button type="submit" class="btn btn-primary btn-xs pull-right " href="#">send</button>
+                                    </span> 
+                                <%# end %> 
+                            </div>
+                        </li>
+                        <% end %> 
+                    </ul>
+                </div>
+</div>

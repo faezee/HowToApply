@@ -1,0 +1,49 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Text:</strong>
+  <%= @comment.text %>
+</p>
+
+<p>
+  <strong>Post: @comment.post : </strong>
+  <%= @comment.post %>
+</p>
+
+<p>
+  <strong>Profile: @comment.profile :</strong>
+  <%= @comment.profile %>
+</p>
+
+<p>
+  <strong>comment az tarafe! : @comment.profile.name:  </strong>
+  <%= @comment.profile.name %>
+</p>
+
+<p>
+  <strong>comment az tarafe! user_email: @comment.profile.user.email:  </strong>
+  <%= @comment.profile.user.email %>
+</p>
+
+<p>
+  <strong>post content :   @comment.post.content:  </strong>
+  <%= @comment.post.content %>
+</p>
+
+<p>
+  <strong>name sahebe post! :   @comment.post.user.profile.name:  </strong>
+  <%= @comment.post.user.profile.name %>
+</p>
+
+
+
+<p>
+  <strong>emaile sahebe post ! :   @comment.post.user.email:  </strong>
+  <%= @comment.post.user.email %>
+</p>
+
+
+<%= link_to 'Edit', edit_comment_path(@comment) %> |
+<%= link_to 'Back', comments_path %>
+
+
