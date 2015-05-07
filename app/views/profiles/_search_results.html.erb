@@ -19,7 +19,11 @@
         <td>
           <div class="pull-right">
             <%= form_tag("/friendables/friend_request?id=#{profile.user.id}" , :remote => true, :id => "request") do %>
-              <%= submit_tag 'follow', :class => 'btn btn-success' %>
+              <% if Friendable.where(:from_id => current_user.id,:to_id => profile.user.id).blank? %>
+                <%= submit_tag 'follow', :class => 'btn btn-success' %>
+              <% else %>
+                    <%= submit_tag 'followed', :class => 'btn btn-success disabled' %>
+              <% end %>
             <% end %>
           </div>
           </td>

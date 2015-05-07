@@ -355,55 +355,64 @@
                 <!--Friends -->
                 <div class="panel panel-default">
                     <div class="panel-heading panel-heading-gray">
-                        <a href="#" class="btn btn-primary btn-xs pull-right">Add <i class="fa fa-plus"></i></a>
-                        <i class="icon-user-1"></i> Friends
+                        Friends
                     </div>
                     <ul class="list-unstyled friends-list">
-                        <li>
-                            <a href="#">
-                                <img src="/assets/guy-6.jpg" alt="image" class="img-responsive" />
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#">
-                                <img src="/assets/woman-3.jpg" alt="image" class="img-responsive" />
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#">
-                                <img src="/assets/guy-2.jpg" alt="image" class="img-responsive" />
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#">
-                                <img src="/assets/guy-9.jpg" alt="image" class="img-responsive" />
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#">
-                                <img src="/assets/woman-9.jpg" alt="image" class="img-responsive" />
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#">
-                                <img src="/assets/guy-4.jpg" alt="image" class="img-responsive" />
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#">
-                                <img src="/assets/guy-1.jpg" alt="image" class="img-responsive" />
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#">
-                                <img src="/assets/woman-4.jpg" alt="image" class="img-responsive" />
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#">
-                                <img src="/assets/guy-6.jpg" alt="image" class="img-responsive" />
-                            </a>
-                        </li>
+                      <% if not @followings.nil? %>
+                          <% @followings.each do |fo| %>
+                              <%# byebug %>
+                              <li>
+                                <% _user = User.find_by_id(fo.to_id) %>
+                                <%= image_tag _user.profile.try(:avatar) if _user.profile.present? %>
+                                <%= _user.profile.name%>
+                              </li>
+                          <% end %>
+                          <%end%>
+                        <!--<li>-->
+                            <!--<a href="#">-->
+                                <!--<img src="/assets/guy-6.jpg" alt="image" class="img-responsive" />-->
+                            <!--</a>-->
+                        <!--</li>-->
+                        <!--<li>-->
+                            <!--<a href="#">-->
+                                <!--<img src="/assets/woman-3.jpg" alt="image" class="img-responsive" />-->
+                            <!--</a>-->
+                        <!--</li>-->
+                        <!--<li>-->
+                            <!--<a href="#">-->
+                                <!--<img src="/assets/guy-2.jpg" alt="image" class="img-responsive" />-->
+                            <!--</a>-->
+                        <!--</li>-->
+                        <!--<li>-->
+                            <!--<a href="#">-->
+                                <!--<img src="/assets/guy-9.jpg" alt="image" class="img-responsive" />-->
+                            <!--</a>-->
+                        <!--</li>-->
+                        <!--<li>-->
+                            <!--<a href="#">-->
+                                <!--<img src="/assets/woman-9.jpg" alt="image" class="img-responsive" />-->
+                            <!--</a>-->
+                        <!--</li>-->
+                        <!--<li>-->
+                            <!--<a href="#">-->
+                                <!--<img src="/assets/guy-4.jpg" alt="image" class="img-responsive" />-->
+                            <!--</a>-->
+                        <!--</li>-->
+                        <!--<li>-->
+                            <!--<a href="#">-->
+                                <!--<img src="/assets/guy-1.jpg" alt="image" class="img-responsive" />-->
+                            <!--</a>-->
+                        <!--</li>-->
+                        <!--<li>-->
+                            <!--<a href="#">-->
+                                <!--<img src="/assets/woman-4.jpg" alt="image" class="img-responsive" />-->
+                            <!--</a>-->
+                        <!--</li>-->
+                        <!--<li>-->
+                            <!--<a href="#">-->
+                                <!--<img src="/assets/guy-6.jpg" alt="image" class="img-responsive" />-->
+                            <!--</a>-->
+                        <!--</li>-->
                     </ul>
                     <div class="clearfix"></div>
                 </div>

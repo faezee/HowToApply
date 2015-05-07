@@ -18,6 +18,7 @@ class ProfilesController < ApplicationController
   def show
     @post = Post.new
     @posts = @profile.user.posts
+    @followings = Friendable.where(:from_id => current_user.id)
   end
 
   # GET /profiles/new
