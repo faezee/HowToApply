@@ -19,6 +19,7 @@ class ProfilesController < ApplicationController
     @post = Post.new
     @posts = @profile.user.posts
     @followings = Friendable.where(:from_id => current_user.id)
+    @followees = Friendable.where(:to_id => current_user.id)
   end
 
   # GET /profiles/new
