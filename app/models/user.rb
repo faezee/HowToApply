@@ -11,7 +11,7 @@ class User < ActiveRecord::Base
   acts_as_messageable
 
   has_many :friendables
-  has_many :users, through: :friendables
+  has_many :users, through: :friendables, :foreign_key => :from_id
 
   has_many :posts
   acts_as_follower

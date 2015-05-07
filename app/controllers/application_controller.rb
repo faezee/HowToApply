@@ -8,7 +8,7 @@ class ApplicationController < ActionController::Base
   def after_sign_up_path_for(user)
   	# byebug
   	if user.profile.present?
-  		return root_path
+  		return profile_path
   	else
   		return new_profile_path
   	end
@@ -17,7 +17,7 @@ class ApplicationController < ActionController::Base
   def after_sign_in_path_for(user)
   	# byebug
   	if user.profile.present?
-  		return root_path
+  		return profile_path
   	else
   		return new_profile_path
   	end

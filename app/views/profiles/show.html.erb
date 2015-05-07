@@ -129,6 +129,10 @@
                         <%= link_to "My Time Line" , showTimeLine_profile_path(current_user.profile.id) %>
                     </li>
                     <li class="active">
+                        <%= link_to "Profile", profile_path(current_user.profile.id) %>
+                    </li>
+
+                    <li >
                         <%= link_to "Edit Profile", edit_profile_path(current_user.profile.id) %>
                     </li>
                     <li>
@@ -500,11 +504,6 @@
 
 <p id="notice"><%= notice %></p>
 
-<div class="pull-right">
-  <%= form_tag("/friendables/friend_request?id=#{@profile.user.id}", :remote => true, :id => "request") do %>
-    <%= submit_tag 'follow', :class => 'btn btn-success' %>
-  <% end %>
-</div>
 
 
 <div class="pull-right">

@@ -73,7 +73,7 @@ class ProfilesController < ApplicationController
   end
 
   def search
-    @user_profiles = Profile.where("name = ? or familyName = ?", params['search_value'], params['search_value'])
+    @user_profiles = Profile.where.not(:id => current_user.profile.id).where("name = ? or familyName = ?", params['search_value'], params['search_value'])
     respond_to do |format|
       format.js
     end
@@ -87,7 +87,7 @@ class ProfilesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def profile_params
-      params.require(:profile).permit(:age, :universityName, :previews, :date_of_birth,
+      params.require(:profile).permit(:age, :universityName, :previews, :date_of_birth, :Job, :country, :Gender, 
         :currentUni, :phoneNumber, :name, :familyName, :avatar, :uploaded_file)
     end
 end
