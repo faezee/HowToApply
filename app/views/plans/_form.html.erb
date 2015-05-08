@@ -1,0 +1,49 @@
+<%= form_for(@plan) do |f| %>
+  <% if @plan.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@plan.errors.count, "error") %> prohibited this plan from being saved:</h2>
+
+      <ul>
+      <% @plan.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :uni_id %><br>
+    <%= f.text_field :uni_id %>
+  </div>
+  <div class="field">
+    <%= f.label :degree_id %><br>
+    <%= f.text_field :degree_id %>
+  </div>
+  <div class="field">
+    <%= f.label :field_id %><br>
+    <%= f.text_field :field_id %>
+  </div>
+  <div class="field">
+    <%= f.label :semester_id %><br>
+    <%= f.text_field :semester_id %>
+  </div>
+  <div class="field">
+    <%= f.label :min_toefl %><br>
+    <%= f.text_field :min_toefl %>
+  </div>
+  <div class="field">
+    <%= f.label :min_GRE %><br>
+    <%= f.text_field :min_GRE %>
+  </div>
+  <div class="field">
+    <%= f.label :deadline %><br>
+    <%= f.date_select :deadline %>
+  </div>
+  <div class="field">
+    <%= f.label :app_fee %><br>
+    <%= f.number_field :app_fee %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

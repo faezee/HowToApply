@@ -1,6 +1,20 @@
 Rails.application.routes.draw do
   
 
+  resources :app_infos
+
+  resources :plans
+
+  resources :semesters
+
+  resources :professers
+
+  resources :degrees
+
+  resources :fields
+
+  resources :unis
+
   resources :comments
 
   resources :friendables

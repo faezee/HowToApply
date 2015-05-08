@@ -4,6 +4,7 @@ class Profile < ActiveRecord::Base
 
     has_many :apply_infos
     has_many :comments
+    has_many :app_infos
 
 	has_attached_file :uploaded_file
     validates :name , presence: true

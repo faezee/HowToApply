@@ -10,8 +10,37 @@
 # you'll amass, the slower it'll run and the greater likelihood for issues).
 #
 # It's strongly recommended that you check this file into your version control system.
+ActiveRecord::Schema.define(version: 20150508122803) do
 
-ActiveRecord::Schema.define(version: 20150506035839) do
+  create_table "app_infos", force: :cascade do |t|
+    t.integer  "plan_id"
+    t.integer  "profile_id"
+    t.string   "acc_or_rej"
+    t.integer  "professer_id"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+  end
+
+  add_index "app_infos", ["plan_id"], name: "index_app_infos_on_plan_id"
+  add_index "app_infos", ["professer_id"], name: "index_app_infos_on_professer_id"
+  add_index "app_infos", ["profile_id"], name: "index_app_infos_on_profile_id"
+
+  create_table "apply_infos", force: :cascade do |t|
+    t.string   "uni"
+    t.string   "teacher"
+    t.string   "field"
+    t.string   "degree"
+    t.integer  "app_fee"
+    t.integer  "min_toefl"
+    t.integer  "min_GRE"
+    t.string   "city"
+    t.string   "country"
+    t.string   "deadline"
+    t.string   "acc_ot_rej"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer  "profile_id"
+  end
 
   create_table "comments", force: :cascade do |t|
     t.string   "text"
@@ -23,6 +52,18 @@ ActiveRecord::Schema.define(version: 20150506035839) do
 
   add_index "comments", ["post_id"], name: "index_comments_on_post_id"
   add_index "comments", ["profile_id"], name: "index_comments_on_profile_id"
+
+  create_table "degrees", force: :cascade do |t|
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "fields", force: :cascade do |t|
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "follows", force: :cascade do |t|
     t.string   "follower_type"
@@ -118,6 +159,24 @@ ActiveRecord::Schema.define(version: 20150506035839) do
   add_index "mentions", ["mentionable_id", "mentionable_type"], name: "fk_mentionables"
   add_index "mentions", ["mentioner_id", "mentioner_type"], name: "fk_mentions"
 
+  create_table "plans", force: :cascade do |t|
+    t.integer  "uni_id"
+    t.integer  "degree_id"
+    t.integer  "field_id"
+    t.integer  "semester_id"
+    t.string   "min_toefl"
+    t.string   "min_GRE"
+    t.date     "deadline"
+    t.integer  "app_fee"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
+  add_index "plans", ["degree_id"], name: "index_plans_on_degree_id"
+  add_index "plans", ["field_id"], name: "index_plans_on_field_id"
+  add_index "plans", ["semester_id"], name: "index_plans_on_semester_id"
+  add_index "plans", ["uni_id"], name: "index_plans_on_uni_id"
+
   create_table "posts", force: :cascade do |t|
     t.integer  "user_id"
     t.text     "content"
@@ -127,6 +186,15 @@ ActiveRecord::Schema.define(version: 20150506035839) do
   end
 
   add_index "posts", ["ancestry"], name: "index_posts_on_ancestry"
+
+  create_table "professers", force: :cascade do |t|
+    t.string   "name"
+    t.integer  "uni_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "professers", ["uni_id"], name: "index_professers_on_uni_id"
 
   create_table "profiles", force: :cascade do |t|
     t.integer  "age"
@@ -154,6 +222,27 @@ ActiveRecord::Schema.define(version: 20150506035839) do
   end
 
   add_index "profiles", ["user_id"], name: "index_profiles_on_user_id"
+
+  create_table "semesters", force: :cascade do |t|
+    t.date     "semester_date"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
+  end
+
+  create_table "teachers", force: :cascade do |t|
+    t.string   "name"
+    t.integer  "uni_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "teachers", ["uni_id"], name: "index_teachers_on_uni_id"
+
+  create_table "unis", force: :cascade do |t|
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                  default: "", null: false

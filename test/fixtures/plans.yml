@@ -1,0 +1,21 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  uni_id: 
+  degree_id: 
+  field_id: 
+  semester_id: 
+  min_toefl: MyString
+  min_GRE: MyString
+  deadline: 2015-05-08
+  app_fee: 1
+
+two:
+  uni_id: 
+  degree_id: 
+  field_id: 
+  semester_id: 
+  min_toefl: MyString
+  min_GRE: MyString
+  deadline: 2015-05-08
+  app_fee: 1

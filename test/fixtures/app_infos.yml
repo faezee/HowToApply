@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  plan_id: 
+  profile_id: 
+  acc_or_rej: MyString
+  professer_id: 
+
+two:
+  plan_id: 
+  profile_id: 
+  acc_or_rej: MyString
+  professer_id: 

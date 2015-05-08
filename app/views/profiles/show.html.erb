@@ -392,7 +392,6 @@
                               </li>
                           <% end %>
                           <%end%>
-
                     </ul>
 
                     <div class="clearfix"></div>
@@ -514,33 +513,10 @@
     <!-- App Scripts Bundle -->
 </body>
 
-<p id="notice"><%= notice %></p>
-
-
-
-<div class="pull-right">
-  <%= form_tag("/profiles/search", :remote => true) do %>
-    <%= text_field_tag :search_value %>
-    <%= submit_tag 'Search', :class => 'btn btn-success' %>
-  <% end %>
-</div>
-<br><br>
-
 
 <div id="search_results">
 </div>
 
-
-<%= link_to 'Edit', edit_profile_path(@profile) %> |
-<%= link_to 'Back', profiles_path %>
-
-
-<%= render 'posts/form' , :object => @post %>
-
-
-<div class="well">
-<%= nested_posts @posts.arrange(:order => :created_at) %>
-</div>
 
 
 

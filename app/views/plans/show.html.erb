@@ -1,0 +1,44 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Uni:</strong>
+  <%= @plan.uni %>
+</p>
+
+<p>
+  <strong>Degree:</strong>
+  <%= @plan.degree %>
+</p>
+
+<p>
+  <strong>Field:</strong>
+  <%= @plan.field %>
+</p>
+
+<p>
+  <strong>Semester:</strong>
+  <%= @plan.semester %>
+</p>
+
+<p>
+  <strong>Min toefl:</strong>
+  <%= @plan.min_toefl %>
+</p>
+
+<p>
+  <strong>Min gre:</strong>
+  <%= @plan.min_GRE %>
+</p>
+
+<p>
+  <strong>Deadline:</strong>
+  <%= @plan.deadline %>
+</p>
+
+<p>
+  <strong>App fee:</strong>
+  <%= @plan.app_fee %>
+</p>
+
+<%= link_to 'Edit', edit_plan_path(@plan) %> |
+<%= link_to 'Back', plans_path %>
