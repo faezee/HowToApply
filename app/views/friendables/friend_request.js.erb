@@ -1,3 +1,8 @@
 alert("salamss");
-$("form#request input[type=submit]").attr('value', 'followed');
-$("form#request input[type=submit]").attr('disabled', 'disabled');
+<% if @f.blank? %>
+$("form#request input[type=submit]").attr('value', 'unfollow');
+$("form#request input[type=submit]").removeClass("btn-success").addClass("btn-danger")
+<% else %>
+$("form#request input[type=submit]").attr('value', 'follow');
+$("form#request input[type=submit]").removeClass("btn-danger").addClass("btn-success")
+<% end %>

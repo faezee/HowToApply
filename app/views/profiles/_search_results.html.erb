@@ -1,4 +1,5 @@
 <table class="table">
+  <%= link_to 'X', '#', :class => "close-search-bar", :onclick => "$('#search_results').html('');" %>
  	<thead>
     	<tr>
       		<th>Name</th>
@@ -22,7 +23,7 @@
               <% if Friendable.where(:from_id => current_user.id,:to_id => profile.user.id).blank? %>
                 <%= submit_tag 'follow', :class => 'btn btn-success' %>
               <% else %>
-                    <%= submit_tag 'followed', :class => 'btn btn-success disabled' %>
+                    <%= submit_tag 'unfollow', :class => 'btn btn-danger' %>
               <% end %>
             <% end %>
           </div>

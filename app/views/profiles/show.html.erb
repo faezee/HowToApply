@@ -14,6 +14,12 @@
                 </button>
                 <a data-toggle="sidebar-chat" class="btn btn-link navbar-btn visible-xs"><i class="fa fa-comments"></i></a>
                 <a class="navbar-brand" href="index.html">Let 's Apply</a>
+              <div class="search-bar">
+                <%= form_tag("/profiles/search", :remote => true) do %>
+                    <%= text_field_tag :search_value %>
+                    <%= submit_tag 'Search', :class => 'btn btn-success' %>
+                <% end %>
+              </div>
 
             </div>
 
@@ -68,19 +74,6 @@
                     </li>
 
 
-                  <div class="form-group">
-                    <label class="col-sm-3 control-label">Input Button</label>
-                    <div class="col-sm-9">
-                      <div class="input-group">
-                        <input type="text" class="form-control">
-                                        <span class="input-group-btn">
-                                    <button class="btn btn-inverse" type="button">Go!</button>
-                                </span>
-                      </div>
-
-                      <!-- /input-group -->
-                    </div>
-                  </div>
                     <!-- <li data-toggle="tooltip" data-placement="bottom" title="A few Color Examples. Download includes CSS Files for all color examples & the tools to Generate any Color combination. This Color-Switcher is for previewing purposes only.">
                         <ul class="skins">
                             <li><span data-skin="default" style="background: #16ae9f "></span>
@@ -128,6 +121,8 @@
             <!-- /.navbar-collapse -->
             </div>
     </div>
+
+
     <nav class="navbar navbar-subnav navbar-static-top" role="navigation">
         <div class="container">
 
@@ -159,6 +154,9 @@
                     <li>
                         <%= link_to "Messages", mailbox_inbox_path %>
                     </li>
+                    <li>
+
+                    </li>
                 </ul>
                 <ul class="nav navbar-nav navbar-right hidden-xs">
                     <li><%= link_to "Logout", destroy_user_session_path, method: :delete %>
@@ -169,6 +167,8 @@
             <!-- /.navbar-collapse -->
             </div>
     </nav>
+
+
     <div class="sidebar right">
         <div class="chat-search">
             <input type="text" class="form-control" placeholder="Search" />
@@ -283,7 +283,9 @@
     //         </div>
     //         <input type="text" class="form-control" placeholder="Type message..." />
     //     </div>
-    --> <div class="chat-window-container"></div>
+    -->
+
+    <div class="chat-window-container"></div>
     <div class="container">
         <div class="panel panel-default">
             <ul class="nav nav-tabs" role="tablist">
@@ -763,7 +765,6 @@
                                 <div class="row">
                                     <div class="col-sm-4"><span class="text-muted">Name</span>
                                     </div>
-                                    <!-- <div class="col-sm-8"><%=current_user.profile.name%></div> -->
                                     <div class="col-sm-8"><%=@profile.name%></div>
                                 </div>
                             </li>
@@ -772,7 +773,6 @@
                                 <div class="row">
                                     <div class="col-sm-4"><span class="text-muted">Family Name</span>
                                     </div>
-                                    <!-- <div class="col-sm-8"><%=current_user.profile.familyName%></div> -->
                                     <div class="col-sm-8"><%=@profile.familyName%></div>
                                 </div>
                             </li>
@@ -780,7 +780,6 @@
                                 <div class="row">
                                     <div class="col-sm-4"><span class="text-muted">Date of Birth</span>
                                     </div>
-                                    <!-- <div class="col-sm-8"><%=current_user.profile.date_of_birth%></div> -->
                                     <div class="col-sm-8"><%=@profile.date_of_birth%></div>
                                 </div>
                             </li>
@@ -788,7 +787,6 @@
                                 <div class="row">
                                     <div class="col-sm-4"><span class="text-muted">Gender</span>
                                     </div>
-                                    <!-- <div class="col-sm-8"><%=current_user.profile.Gender%></div> -->
                                     <div class="col-sm-8"><%=@profile.Gender%></div>
                                 </div>
                             </li>
@@ -796,11 +794,21 @@
                                 <div class="row">
                                     <div class="col-sm-4"><span class="text-muted">Lives in</span>
                                     </div>
-                                    <!-- <div class="col-sm-8"><%=current_user.profile.country%></div> -->
                                     <div class="col-sm-8"><%=@profile.country%></div>
                                 </div>
                             </li>
                         </ul>
+                    <% if current_user.profile != @profile %>
+                      <%= form_tag("/friendables/friend_request?id=#{@profile.user.id}" , :remote => true, :id => "request") do %>
+                          <% if Friendable.where(:from_id => current_user.id,:to_id => @profile.user.id).blank? %>
+                              <%= submit_tag 'follow', :class => 'btn btn-success' %>
+                          <% else %>
+                              <%= submit_tag 'unfollow', :class => 'btn btn-danger' %>
+                          <% end %>
+                      <% end %>
+                    <% end %>
+
+
                     </div>
                 </div>
             </div>
@@ -957,7 +965,7 @@
 <br><br>
 
 
-<div id="search_results" class="pull-right">
+<div id="search_results">
 </div>
 
 
