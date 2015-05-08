@@ -6,8 +6,13 @@ class FriendablesController < ApplicationController
     to_id = params[:id] # this is the id of the user you want to become friend with
     followings = Friendable.where(:from_id => current_user.id)
     followees = Friendable.where(:to_id => current_user.id)
-    if not (followings.present? and followings.count == 1)
+
+    @f = Friendable.where(:from_id => from_id, :to_id => to_id)
+
+    if @f.blank?
       friendable = Friendable.create(from_id: from_id, to_id: to_id, accepted: true)
+    else
+      @f.first.destroy
     end
     
   end
