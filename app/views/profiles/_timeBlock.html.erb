@@ -27,15 +27,17 @@
 
                          <% post.comments.each do |comment| %>
                             <%#= render :partial => 'profiles/timeBlock', :object => post %>
-                            <%= render :partial => "commentBlock", :locals => {:comment => comment} %>
+                            <%= render :partial => "commentBlock", :locals => {:@comment => comment} %>
                         <% end if post.present? %>
 
-                        <%= form_tag("/comments") do  %>
+                        <div id="new-comment-div-<%=post.id%>">
+                        </div>
+                        <%= form_tag("/comments", :remote => "true") do  %>
                         <%= hidden_field_tag 'post_id' , post.id %>
                         <li class="comment-form">
                             <div class="input-group">
                                     <%#= form_tag("/comments") do  %>
-                                    <input type="text"  name="comment[text]"  class="form-control" />
+                                    <input type="text"  name="comment[text]"  class="form-control", id="comment-text-field-<%=post.id%>" />
                                     <span class="input-group-addon">
                                         <!-- <a href=""><i class="fa fa-photo"></i></a> -->
                                          <button type="submit" class="btn btn-primary btn-xs pull-right " href="#">send</button>

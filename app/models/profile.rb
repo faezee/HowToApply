@@ -2,6 +2,7 @@ class Profile < ActiveRecord::Base
 
 	belongs_to :user
 
+    has_many :apply_infos
     has_many :comments
 
 	has_attached_file :uploaded_file

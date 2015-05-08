@@ -1,13 +1,13 @@
 
 <li>
     <div class="media">
-        <a href="" class="pull-left">
-            <img src="/assets/woman-5.jpg" class="media-object">
-                </a>
+        <!-- <a href="" class="pull-left"> -->
+            <img src="/assets/woman-5.jpg" class="pull-left media-object" id="comment-media-object">
+                <!-- </a> -->
             <div class="media-body">
-                <a href="" class="comment-author"> <%=comment.profile.name%> </a>
-                <span><%=comment.text%></span>
-            	<div class="comment-date"><%= time_ago_in_words(comment.created_at) %></div>
+                <a href="" class="comment-author"> <%=@comment.profile.name%> </a>
+                <span><%=@comment.text%></span>
+            	<div class="comment-date"><%= time_ago_in_words(@comment.created_at) %></div>
             </div>
     </div>
 </li>

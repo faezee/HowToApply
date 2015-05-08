@@ -11,7 +11,24 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150506035839) do
+ActiveRecord::Schema.define(version: 20150508070832) do
+
+  create_table "apply_infos", force: :cascade do |t|
+    t.string   "uni"
+    t.string   "teacher"
+    t.string   "field"
+    t.string   "degree"
+    t.integer  "app_fee"
+    t.integer  "min_toefl"
+    t.integer  "min_GRE"
+    t.string   "city"
+    t.string   "country"
+    t.string   "deadline"
+    t.string   "acc_ot_rej"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer  "profile_id"
+  end
 
   create_table "comments", force: :cascade do |t|
     t.string   "text"

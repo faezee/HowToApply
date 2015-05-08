@@ -16,6 +16,7 @@
 
   <tbody>
     <% @comments.each do |comment| %>
+    <% if comment.profile.name == "samira" %>
       <tr>
         <td><%= comment.text %></td>
         <td><%= comment.post %></td>
@@ -26,6 +27,7 @@
         <td><%= link_to 'Edit', edit_comment_path(comment) %></td>
         <td><%= link_to 'Destroy', comment, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
+      <% end %>
     <% end %>
   </tbody>
 </table>

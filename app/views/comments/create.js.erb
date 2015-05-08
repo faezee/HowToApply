@@ -1,0 +1,2 @@
+$('#new-comment-div-<%=@comment.post_id%>').html("<%= escape_javascript(render 'profiles/commentBlock') %>");
+$('#comment-text-field-<%=@comment.post_id%>').val("");
