@@ -2,7 +2,8 @@
 <li>
     <div class="media">
         <!-- <a href="" class="pull-left"> -->
-            <img src="/assets/woman-5.jpg" class="pull-left media-object" id="comment-media-object">
+            <!-- <img src="/assets/woman-5.jpg" class="pull-left media-object" id="comment-media-object"> -->
+            <%= image_tag @comment.profile.try(:avatar) , class: "pull-left media-object" , id: "comment-media-object" %>
                 <!-- </a> -->
             <div class="media-body">
                 <a href="" class="comment-author"> <%=@comment.profile.name%> </a>

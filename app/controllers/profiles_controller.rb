@@ -1,4 +1,6 @@
 class ProfilesController < ApplicationController
+
+protect_from_forgery with: :null_session, if: Proc.new { |c| c.request.format == 'application/json' }
   before_action :set_profile, only: [:show, :edit, :update, :destroy, :showTimeLine]
 
   # GET /profiles
@@ -7,7 +9,22 @@ class ProfilesController < ApplicationController
   def showTimeLine
      # @posts = @profile.user.posts
      @posts = Post.all.order("created_at DESC")
+
+     @follower_ids = Friendable.where(:to_id => @profile.user.id).collect { |f| f.from_id}
+     @followee_ids = Friendable.where(:from_id => @profile.user.id).collect { |f| f.to_id}
+     @followeespost = Post.where(:user_id => @followee_ids) + Post.where(:user_id => @profile.user.id)
+     @followeesposts = @followeespost.sort_by{|e| e.created_at}.reverse
+
+     @profile_posts = Post.where(:user_id => @profile.user.id )
+
   end 
+
+  def notification 
+    
+  end
+
+  def followables
+  end
 
   def index
     @profiles = Profile.all
@@ -20,6 +37,7 @@ class ProfilesController < ApplicationController
     @posts = @profile.user.posts
     @followings = Friendable.where(:from_id => @profile.user.id)
     @followees = Friendable.where(:to_id => @profile.user.id)
+    @plans = Plan.all
   end
 
   # GET /profiles/new
@@ -75,10 +93,11 @@ class ProfilesController < ApplicationController
   end
 
   def search
-    @user_profiles = Profile.where.not(:id => current_user.profile.id).where("name = ? or familyName = ?", params['search_value'], params['search_value'])
+    @user_profiles = Profile.where.not(:id => current_user.profile.id).where("name LIKE ? OR familyName like ?", "%#{params[:search_value]}%", "%#{params[:search_value]}%")
     respond_to do |format|
       format.js
     end
+
   end
 
   private
@@ -90,6 +109,6 @@ class ProfilesController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def profile_params
       params.require(:profile).permit(:age, :universityName, :previews, :date_of_birth, :Job, :country, :Gender, 
-        :currentUni, :phoneNumber, :name, :familyName, :avatar, :uploaded_file)
+        :currentUni, :phoneNumber, :name, :familyName, :avatar, :uploaded_file,:search_value)
     end
 end

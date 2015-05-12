@@ -19,9 +19,9 @@ class ConversationsController < ApplicationController
 	end
 	 
 	def show
-		@receipts = conversation.receipts_for(current_user)
+		@receipts = conversation.receipts_for(User.first)
 		# mark conversation as read
-		conversation.mark_as_read(current_user)
+		conversation.mark_as_read(User.first)
 	end
 	 
 	def trash

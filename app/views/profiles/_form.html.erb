@@ -11,7 +11,7 @@
             <div class="lock-container">
                 <h1 style="color:#000000">Account Access</h1>
                 <div class="panel panel-default text-center">
-                    <img src="/assets/guy-5.jpg" class="img-circle" id="name1">
+                    <img src="" class="img-circle" id="name1">
                     <div class="panel-body">
                     <%= bootstrap_form_for(@profile, :html => { :multipart => true }) do |f| %>
 
@@ -39,6 +39,17 @@
             </div>
         </div>
     </div>
+    <div class="sidebar right">
+        <div class="chat-search">
+            <!-- <input type="text" class="form-control" placeholder="Search" /> -->
+             <%= form_tag({ controller: "profiles" , action: "search" },:format => :js,:id => 'main_search' ,remote: true , method: "get"  ) do %>
+                    <%= text_field_tag :search_value, nil,  class: 'form-control' , :autocomplete => :off , :placeholder => "search here.." %>
+                    <%#= submit_tag 'Search', :class => 'btn btn-success' %>
+                <% end %>
+        </div>
+        <ul id="search_results">
+        </ul>
+    </div>  
     <script type="text/javascript">
         $('#name1').on('click',function(){
             $('#profile_avatar').click();

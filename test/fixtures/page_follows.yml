@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  folowee_type: MyString
+  folowee_id: 1
+  folower_type: MyString
+  folower_id: 1
+
+two:
+  folowee_type: MyString
+  folowee_id: 1
+  folower_type: MyString
+  folower_id: 1

@@ -1,1 +1,8 @@
-$('#search_results').html("<%= escape_javascript(render 'search_results') %>");
+$('#search_results').empty();
+
+
+<% @user_profiles.each do |x| %>
+
+	$('#search_results').append(
+		'<li class =""> <h4 class=""><%= link_to x.name , profile_path(x) %></h4> </li>');
+	<% end %>

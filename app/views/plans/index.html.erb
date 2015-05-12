@@ -6,8 +6,11 @@
   <thead>
     <tr>
       <th>Uni</th>
+      <th>Uni name</th>
       <th>Degree</th>
+      <th>Degree name</th> 
       <th>Field</th>
+      <th>Field name</th>
       <th>Semester</th>
       <th>Min toefl</th>
       <th>Min gre</th>
@@ -21,8 +24,11 @@
     <% @plans.each do |plan| %>
       <tr>
         <td><%= plan.uni %></td>
+        <td><%= plan.uni.name %></td>
         <td><%= plan.degree %></td>
+        <td><%= plan.degree.name %></td>
         <td><%= plan.field %></td>
+        <td><%= plan.field.name %></td>
         <td><%= plan.semester %></td>
         <td><%= plan.min_toefl %></td>
         <td><%= plan.min_GRE %></td>

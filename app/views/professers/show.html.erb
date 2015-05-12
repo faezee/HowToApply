@@ -10,5 +10,17 @@
   <%= @professer.uni %>
 </p>
 
+<p>
+	<% Post.where(:postable_type => @professer.class.to_s, :postable_id => @professer.id).each do |p| %>
+		<%= p.content %>
+		<br>
+	<% end %>
+</p>
+
+<% if current_user.id == 1 %>
+
+	<% @post = Post.new %>	
+	<%= render :partial => 'posts/form', :locals => {:postable => @professer } %>
+<% end %>
 <%= link_to 'Edit', edit_professer_path(@professer) %> |
 <%= link_to 'Back', professers_path %>

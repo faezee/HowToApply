@@ -11,6 +11,11 @@
 </p>
 
 <p>
+  <strong>Profile Name , @app_info.profile.name : </strong>
+  <%= @app_info.profile.name %>
+</p>
+
+<p>
   <strong>Acc or rej:</strong>
   <%= @app_info.acc_or_rej %>
 </p>
@@ -19,6 +24,8 @@
   <strong>Professer:</strong>
   <%= @app_info.professer %>
 </p>
+
+
 
 <%= link_to 'Edit', edit_app_info_path(@app_info) %> |
 <%= link_to 'Back', app_infos_path %>

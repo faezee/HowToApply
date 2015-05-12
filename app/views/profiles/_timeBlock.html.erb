@@ -4,9 +4,11 @@
                 <div class="panel panel-default">
                     <div class="panel-heading">
                         <div class="media">
-                            <a href="" class="pull-left">
-                                <img src="/assets/guy-2.jpg" class="media-object">
-                            </a>
+                            <!-- <a href="" class="pull-left"> -->
+                                <!-- <img src="/assets/guy-2.jpg" class="pull-left media-object" id= "post-media-object" > -->
+                                <%= image_tag current_user.profile.try(:avatar) , class: "media-object", id: "post-media-object" %>
+                                <%#= image_tag post.user.profile.try(:avatar) , class: "media-object" %>
+                            <!-- </a> -->
                             <div class="media-body">
                                 <a href="#" class="pull-right text-muted"><i class="icon-reply-all-fill fa fa-2x "></i></a>
                                 <a href=""><%= post.user.profile.name %></a>

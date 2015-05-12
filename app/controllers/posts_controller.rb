@@ -32,6 +32,12 @@ class PostsController < ApplicationController
 
     respond_to do |format|
       if @post.save
+        Friendable.where(:to_id => @post.user.id).each do |f|
+          Notification.create!(:user_id => f.from_id, :event_type => 'User', :event_id => @post.user.id, :content => @post.content)
+        end
+        PageFollow.where(:folowee_type => @post.postable_type, :folowee_id => @post.postable_id).each do |pf|
+          Notification.create!(:user_id => pf.folower_id, :event_type => @post.postable_type, :event_id => @post.postable_id, :content => @post.content)
+        end
         format.html { redirect_to profile_path(current_user.profile) , notice: 'Post was successfully created.' }
         format.json { render :show, status: :created, location: @post }
       else
@@ -73,6 +79,6 @@ class PostsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def post_params
-      params.require(:post).permit(:content)
+      params.require(:post).permit(:content, :postable_type, :postable_id)
     end
 end

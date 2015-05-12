@@ -1,0 +1,61 @@
+<%= form_for AppInfo.new , class: 'form-horizontal' do |f|%>
+
+                    
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">University </label>
+                        <div class="col-sm-9">
+                        	<%= f.select :uni_id , Uni.all.try(:map) {|e| [e.name, e.id]} , {},{class: 'selectpicker' , 'data-style' => "btn-white" , 'data-live-search'=>"true" , 'data-size'=>"5"} %>
+                        	<!-- <select name="select" class="selectpicker" data-style="btn-white" data-live-search="true" data-size="5"> -->
+                        </div>
+
+                    </div>
+                    <!-- ********************************************************************** -->
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">Field</label>
+                        <div class="col-sm-9">
+                        	<%= f.select :field_id , Field.all.try(:map) {|e| [e.name, e.id]} , {},{class: 'selectpicker' , 'data-style' => "btn-white" , 'data-live-search'=>"true" } %>
+                        </div>
+
+                    </div>
+                    <!-- ********************************************************************** -->
+                     <div class="form-group">
+                        <label class="col-sm-3 control-label">Degree</label>
+                        <div class="col-sm-9">
+                        	<%= f.select :degree_id , Degree.all.try(:map) {|e| [e.name, e.id]} , {},{class: 'selectpicker' , 'data-style' => "btn-white" , 'data-live-search'=>"true" } %>
+                        </div>
+
+                    </div>
+                <!-- ********************************************************************** -->
+                    <div class="form-group">
+                        <!-- <label for="inputEmail3" class="col-sm-3 control-label">professor </label>
+                        <div class="col-sm-9">
+                            <input type="text" name="prof_name" class="form-control" placeholder="professor name">
+                        </div> -->
+                        <label class="col-sm-3 control-label">Professor </label>
+                        <div class="col-sm-9">
+                            <%= f.select :professer_id , Professer.all.try(:map) {|e| [e.name, e.id]} , {},{class: 'selectpicker' , 'data-style' => "btn-white" , 'data-live-search'=>"true" , 'data-size'=>"5"} %>
+                            <!-- <select name="select" class="selectpicker" data-style="btn-white" data-live-search="true" data-size="5"> -->
+                        </div>
+                    </div>
+                            
+                           
+                <!-- ********************************************************************** -->
+
+                     <!--        <div class="form-group">
+                                <label class="col-sm-3 control-label">Multiple</label>
+                                <div class="col-sm-9">
+                                    <select class="selectpicker" multiple data-style="btn-white" title='Choose one of the following...'>
+                                        <option>Mustard</option>
+                                        <option>Ketchup</option>
+                                        <option>Relish</option>
+                                    </select>
+                                </div>
+                            </div> -->
+                    <!-- ********************************************************************** -->
+                            
+                            <div class="form-group">
+                                <div class="col-sm-offset-3 col-sm-9">
+                                    <button type="submit" class="btn btn-primary">Submit</button>
+                                </div>
+                            </div>
+<%end%>

@@ -10,7 +10,8 @@
 # you'll amass, the slower it'll run and the greater likelihood for issues).
 #
 # It's strongly recommended that you check this file into your version control system.
-ActiveRecord::Schema.define(version: 20150508122803) do
+
+ActiveRecord::Schema.define(version: 20150511010917) do
 
   create_table "app_infos", force: :cascade do |t|
     t.integer  "plan_id"
@@ -24,23 +25,6 @@ ActiveRecord::Schema.define(version: 20150508122803) do
   add_index "app_infos", ["plan_id"], name: "index_app_infos_on_plan_id"
   add_index "app_infos", ["professer_id"], name: "index_app_infos_on_professer_id"
   add_index "app_infos", ["profile_id"], name: "index_app_infos_on_profile_id"
-
-  create_table "apply_infos", force: :cascade do |t|
-    t.string   "uni"
-    t.string   "teacher"
-    t.string   "field"
-    t.string   "degree"
-    t.integer  "app_fee"
-    t.integer  "min_toefl"
-    t.integer  "min_GRE"
-    t.string   "city"
-    t.string   "country"
-    t.string   "deadline"
-    t.string   "acc_ot_rej"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.integer  "profile_id"
-  end
 
   create_table "comments", force: :cascade do |t|
     t.string   "text"
@@ -159,6 +143,24 @@ ActiveRecord::Schema.define(version: 20150508122803) do
   add_index "mentions", ["mentionable_id", "mentionable_type"], name: "fk_mentionables"
   add_index "mentions", ["mentioner_id", "mentioner_type"], name: "fk_mentions"
 
+  create_table "notifications", force: :cascade do |t|
+    t.integer  "user_id"
+    t.string   "event_type"
+    t.integer  "event_id"
+    t.text     "content"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "page_follows", force: :cascade do |t|
+    t.string   "folowee_type"
+    t.integer  "folowee_id"
+    t.string   "folower_type"
+    t.integer  "folower_id"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+  end
+
   create_table "plans", force: :cascade do |t|
     t.integer  "uni_id"
     t.integer  "degree_id"
@@ -180,9 +182,11 @@ ActiveRecord::Schema.define(version: 20150508122803) do
   create_table "posts", force: :cascade do |t|
     t.integer  "user_id"
     t.text     "content"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
     t.string   "ancestry"
+    t.string   "postable_type"
+    t.integer  "postable_id"
   end
 
   add_index "posts", ["ancestry"], name: "index_posts_on_ancestry"
@@ -228,15 +232,6 @@ ActiveRecord::Schema.define(version: 20150508122803) do
     t.datetime "created_at",    null: false
     t.datetime "updated_at",    null: false
   end
-
-  create_table "teachers", force: :cascade do |t|
-    t.string   "name"
-    t.integer  "uni_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  add_index "teachers", ["uni_id"], name: "index_teachers_on_uni_id"
 
   create_table "unis", force: :cascade do |t|
     t.string   "name"

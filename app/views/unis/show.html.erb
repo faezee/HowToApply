@@ -1,9 +1,180 @@
-<p id="notice"><%= notice %></p>
+    <link href="/assets/default.min.css" rel="stylesheet">
 
-<p>
-  <strong>Name:</strong>
-  <%= @uni.name %>
-</p>
+    <link href="/assets/default.map.css" rel="stylesheet">
+    <link href="/assets/default.css.map" rel="stylesheet">
 
-<%= link_to 'Edit', edit_uni_path(@uni) %> |
-<%= link_to 'Back', unis_path %>
+    <link href="/assets/font-awesome.css" rel="stylesheet">
+    <link href="/assets/font-awesome.min.css" rel="stylesheet">
+
+
+
+
+    
+    <div class="sidebar right">
+        <div class="chat-search">
+            <input type="text" class="form-control" placeholder="Search" />
+        </div>
+        <ul class="chat-contacts">
+            <li class="online" data-user-id="1">
+                <a href="#">
+                    <div class="media">
+                        <div class="pull-left">
+                            <span class="status"></span>
+                            <img src="images/people/110/guy-6.jpg" width="40" class="img-circle" />
+                        </div>
+                        <div class="media-body">
+                            <div class="contact-name">Jonathan S.</div>
+                            <small>"Free Today"</small>
+                        </div>
+                    </div>
+                </a>
+            </li>
+            <li class="online away" data-user-id="2">
+                <a href="#">
+                    <div class="media">
+                        <div class="pull-left">
+                            <span class="status"></span>
+                            <img src="images/people/110/woman-5.jpg" width="40" class="img-circle" />
+                        </div>
+                        <div class="media-body">
+                            <div class="contact-name">Mary A.</div>
+                            <small>"Feeling Groovy"</small>
+                        </div>
+                    </div>
+                </a>
+            </li>
+            <li class="online" data-user-id="3">
+                <a href="#">
+                    <div class="media">
+                        <div class="pull-left">
+                            <span class="status"></span>
+                            <img src="images/people/110/guy-3.jpg" width="40" class="img-circle" />
+                        </div>
+                        <div class="media-body">
+                            <div class="contact-name">Adrian D.</div>
+                            <small>Busy</small>
+                        </div>
+                    </div>
+                </a>
+            </li>
+            <li class="offline" data-user-id="4">
+                <a href="#">
+                    <div class="media">
+                        <div class="pull-left">
+                            <img src="images/people/110/woman-6.jpg" width="40" class="img-circle" />
+                        </div>
+                        <div class="media-body">
+                            <div class="contact-name">Michelle S.</div>
+                            <small>Offline</small>
+                        </div>
+                    </div>
+                </a>
+            </li>
+        </ul>
+    </div>
+    <div class="chat-window-container"></div>
+    <div class="container">
+        <div class="cover profile">
+            <div class="wrapper">
+                <div class="image">
+                    <img src="/assets/url.jpg" alt="people" />
+                </div>
+                <ul class="friends">
+                    <li>
+                        <a href="#">
+                            <img src="/assets/jabedar.jpg" alt="people" class="img-responsive">
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <img src="/assets/rashed.jpg" alt="people" class="img-responsive">
+                        </a>
+                    </li>
+                    
+                      <!--  <a href="#">
+                            <img src="/assets/picture-73.jpg" alt="people" class="img-responsive">
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <img src="/assets/hashemi.jpg" alt="people" class="img-responsive">
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <img src="/assets/guy-1.jpg" alt="people" class="img-responsive">
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <img src="/assets/woman-4.jpg" alt="people" class="img-responsive">
+                        </a>
+                    </li>-->
+                    <li><a href="#" class="group"><i class="fa fa-group"></i></a>
+                    </li>
+                </ul>
+            </div>
+            <div class="cover-info">
+                <div class="avatar">
+                    <img src="/assets/logo.png" alt="people" />
+                </div>
+                <div class="name">
+                    <a href="#">
+                <%= @uni.name %> <%= @uni.id %>
+            </a>
+                </div>
+                <ul class="cover-nav">
+                    
+                    <li>
+                    <% if @page_follows.where("folowee_id=? and folower_id=? and folowee_type=?",@uni.id, current_user.id, "Uni").present? %>
+                        <% folow_del= @page_follows.where("folowee_id=? and folower_id=? and folowee_type=?",@uni.id, current_user.id, "Uni").first %>
+                        <a href='/page_follows/<%=folow_del.id%>?followee_id=<%=@uni.id%>'  data-method='delete'>unfollow</a> 
+                    <% else %>
+                        <a href='/page_follows?followee_id=<%=@uni.id%>'  data-method='post'>follow</a> 
+                    <% end %>
+                    </li>
+                    <!-- <li><a href="user-public-profile.html"><i class="fa fa-fw icon-user-1"></i> About</a> -->
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="timeline row" data-toggle="gridalicious">
+            <% if current_user.id==1 %>
+            <div class="timeline-block">
+                <div class="panel panel-default share">
+                    <div class="panel-heading panel-heading-gray title">
+                        What&acute;s new
+                    </div>
+                    <div class="panel-body">
+                         
+                        <%= form_tag("/posts") do  %>
+                        <%= hidden_field_tag 'post[postable_type]', "Uni" %> 
+                        <%= hidden_field_tag 'post[postable_id]', @uni.id.to_s %>
+                        <textarea name="post[content]" class="form-control share-text" rows="3" placeholder="Share your status..."></textarea>
+                    </div>
+                    <div class="panel-footer share-buttons">
+                        
+                        <a href="#">
+                            <i class="fa fa-map-marker"></i>
+                        </a>
+                                  
+                        <button type="submit" class="btn btn-primary btn-xs pull-right display-none">Post</button>
+                        
+                        <% end %>
+                    </div>
+                </div>
+            </div>
+            <% end %>
+
+            
+            <% Post.where(:postable_type => 'Uni', :postable_id => @uni.id).each do |post| %>
+                <%= render :partial => "timeBlockUni", :locals => {:post => post} %>
+            <% end %>
+
+
+
+             
+
+            
+        </div>
+    </div>

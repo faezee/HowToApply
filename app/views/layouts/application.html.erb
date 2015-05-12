@@ -12,11 +12,33 @@
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
 </head>
+
 <body>
 
+<% if user_signed_in? and current_user.profile  %>
+
+  <%= render 'layouts/nav' %>
+
+<% end %>  
 
   <%= yield %>
   
-  
+
+
 </body>
+
+<div class="footer">
+        Let's Apply &copy; Copyright Notice
+    </div>
+
+    <!-- // Footer -->
+    
+<!-- Vendor Scripts Bundle -->
+<!-- <script src="/assets/vendor.min.js"></script> -->
+<!-- <script src="/assets/vendor.js"></script> -->
+    <!-- App Scripts Bundle -->
+    
+<script src="/assets/scripts.min.js"></script> 
+<script src="/assets/scripts.js"></script>
+
 </html>

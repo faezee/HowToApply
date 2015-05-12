@@ -1,0 +1,131 @@
+
+
+
+  
+
+    <nav class="navbar navbar-subnav navbar-static-top" role="navigation">
+        <div class="container">
+
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#subnav">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="fa fa-ellipsis-h"></span>
+                </button>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="subnav">
+                <ul class="nav navbar-nav">
+                    <li>
+                        <%#= link_to "Time Line" , showTimeLine_profile_path(@profile.id) %>
+                        <%= link_to "Time Line" , showTimeLine_profile_path(current_user.profile.id) %>
+                    </li>
+                    <li >
+                        <%#= link_to "Profile", profile_path(@profile.id) %>
+                        <%= link_to "Profile" , profile_path(current_user.profile.id) %>
+                    </li>
+                    
+                    
+                    <li class="active">
+                        <%= link_to "Notifications", notification_profile_path(current_user.profile.id) %>
+                    </li>
+                    <li >
+                        <%= link_to "Edit Profile", edit_profile_path(current_user.profile.id) %>
+                    </li>
+                    
+                </ul>
+                <ul class="nav navbar-nav navbar-right hidden-xs">
+                    <li><%= link_to "Logout", destroy_user_session_path, method: :delete %>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- /.navbar-collapse -->
+            </div>
+    </nav>
+
+
+    <div class="sidebar right">
+        <div class="chat-search">
+            <!-- <input type="text" class="form-control" placeholder="Search" /> -->
+             <%= form_tag({ controller: "profiles" , action: "search" },:format => :js,:id => 'main_search' ,remote: true , method: "get"  ) do %>
+                    <%= text_field_tag :search_value, nil,  class: 'form-control' , :autocomplete => :off , :placeholder => "search here.." %>
+                    <%#= submit_tag 'Search', :class => 'btn btn-success' %>
+                <% end %>
+        </div>
+        <ul id="search_results">
+        </ul>
+    </div>  
+   <!--  //     <div class="panel panel-default">
+    //         <div class="panel-heading" data-toggle="chat-collapse" data-target="#chat-bill">
+    //             <a href="#" class="close"><i class="fa fa-times"></i></a>
+    //             <a href="#">
+    //                 <img src="{{ user_image }}" width="40" class="pull-left">
+    //                 <span class="contact-name">{{user}}</span>
+    //             </a>
+    //         </div>
+    //         <div class="panel-body" id="chat-bill">
+    //             <div class="media">
+    //                 <div class="pull-left">
+    //                     <img src="{{ user_image }}" width="25" class="img-circle" alt="people" />
+    //                 </div>
+    //                 <div class="media-body">
+    //                     <span class="message">Feeling Groovy?</span>
+    //                 </div>
+    //             </div>
+    //             <div class="media right">
+    //                 <div class="pull-right">
+    //                     <img src="{{ user_image }}" width="25" class="img-circle" alt="people" />
+    //                 </div>
+    //                 <div class="media-body">
+    //                     <span class="message">Yep.</span>
+    //                 </div>
+    //             </div>
+    //             <div class="media">
+    //                 <div class="pull-left">
+    //                     <img src="{{ user_image }}" width="25" class="img-circle" alt="people" />
+    //                 </div>
+    //                 <div class="media-body">
+    //                     <span class="message">This chat window looks amazing.</span>
+    //                 </div>
+    //             </div>
+    //             <div class="media right">
+    //                 <div class="pull-right">
+    //                     <img src="{{ user_image }}" width="25" class="img-circle" alt="people" />
+    //                 </div>
+    //                 <div class="media-body">
+    //                     <span class="message">Thanks!</span>
+    //                 </div>
+    //             </div>
+    //         </div>
+    //         <input type="text" class="form-control" placeholder="Type message..." />
+    //     </div>
+    -->
+
+    <div class="chat-window-container"></div>
+    <div class="container">
+    <% Notification.where(:user => User.first).order(:created_at).reverse.each do |n| %>
+            <%= n.content %> - 
+            <% if n.event_type != 'User'%>
+                <%= n.event_type.classify.constantize.find(n.event_id).name %> 
+            <% else %>
+                <%= n.event_type.classify.constantize.find(n.event_id).profile.name %> 
+            <% end %>
+            <td><%= link_to 'Show', n.event_type.classify.constantize.find(n.event_id) %></td>
+            <br>
+    <% end %>
+        </div>
+        
+    </div>
+
+
+
+
+
+<div id="search_results">
+</div>
+
+
+
+

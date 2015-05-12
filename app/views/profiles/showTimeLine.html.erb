@@ -1,113 +1,5 @@
 
-    <!-- Fixed navbar -->
-    <div
-   class="navbar navbar-main navbar-primary navbar-fixed-top" role="navigation">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#main-nav">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a data-toggle="sidebar-chat" class="btn btn-link navbar-btn visible-xs"><i class="fa fa-comments"></i></a>
-                <a class="navbar-brand" href="index.html">Social</a>
-            </div>
-
-            <!-- Collect the nav links, forms, and other content for toggling -->
-            <div class="collapse navbar-collapse" id="main-nav">
-                <ul class="nav navbar-nav">
-                    <li><a href="../index.html">Themes</a>
-                    </li>
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Pages <span class="caret"></span></a>
-                        <ul class="dropdown-menu" role="menu">
-                            <li class="dropdown-header">Public User Pages</li>
-                            <li class="active"><a href="user-public-timeline.html">Timeline</a>
-                            </li>
-                            <li><a href="user-public-profile.html">About</a>
-                            </li>
-                            <li><a href="user-public-users.html">Friends</a>
-                            </li>
-                            <li class="dropdown-header">Private User Pages</li>
-                            <li><a href="user-private-messages.html">Messages</a>
-                            </li>
-                            <li><a href="user-private-profile.html">Profile</a>
-                            </li>
-                            <li><a href="index.html">Timeline</a>
-                            </li>
-                            <li><a href="user-private-users.html">Friends</a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li class="dropdown">
-                        <a href="buttons.html" class="dropdown-toggle" data-toggle="dropdown">UI Components <span class="caret"></span></a>
-                        <ul class="dropdown-menu">
-                            <li>
-                                <a href="buttons.html"><i class="fa fa-th"></i> Buttons</a>
-                            </li>
-                            <li>
-                                <a href="icons.html"><i class="fa fa-paint-brush"></i> Icons</a>
-                            </li>
-                            <li>
-                                <a href="progress.html"><i class="fa fa-tasks"></i> Progress</a>
-                            </li>
-                            <li>
-                                <a href="grid.html"><i class="fa fa-columns"></i> Grid</a>
-                            </li>
-                            <li>
-                                <a href="forms.html"><i class="fa fa-sliders"></i> Forms</a>
-                            </li>
-                            <li>
-                                <a href="tables.html"><i class="fa fa-table"></i> Tables</a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li data-toggle="tooltip" data-placement="bottom" title="A few Color Examples. Download includes CSS Files for all color examples & the tools to Generate any Color combination. This Color-Switcher is for previewing purposes only.">
-                        <ul class="skins">
-                            <li><span data-skin="default" style="background: #16ae9f "></span>
-                            </li>
-                            <li><span data-skin="orange" style="background: #e74c3c "></span>
-                            </li>
-                            <li><span data-skin="blue" style="background: #4687ce "></span>
-                            </li>
-                            <li><span data-skin="purple" style="background: #af86b9 "></span>
-                            </li>
-                            <li><span data-skin="brown" style="background: #c3a961 "></span>
-                            </li>
-                            <li><span data-skin="default-nav-inverse" style="background: #242424 "></span>
-                            </li>
-                        </ul>
-                    </li>
-                </ul>
-                <ul class="nav navbar-nav navbar-right">
-                    <li class="hidden-xs">
-                        <a href="#" data-toggle="sidebar-chat">
-                            <i class="fa fa-comments"></i>
-                        </a>
-                    </li>
-
-                    <!-- User -->
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle user" data-toggle="dropdown">
-                            <img src="/assets/guy-5.jpg" alt="Bill" class="img-circle" width="40" /> Bill <span class="caret"></span>
-                        </a>
-                        <ul class="dropdown-menu" role="menu">
-                            <li><a href="user-private-profile.html">Profile</a>
-                            </li>
-                            <li><a href="user-private-messages.html">Messages</a>
-                            </li>
-                            <li><a href="login.html">Logout</a>
-                            </li>
-                        </ul>
-                    </li>
-                </ul>
-            </div>
-
-            <!-- /.navbar-collapse -->
-            </div>
-    </div>
-    <div class="sidebar right">
+<!--     <div class="sidebar right">
         <div class="chat-search">
             <input type="text" class="form-control" placeholder="Search" />
         </div>
@@ -176,6 +68,18 @@
                 </a>
             </li>
         </ul>
+    </div> -->
+
+    <div class="sidebar right">
+        <div class="chat-search">
+            <!-- <input type="text" class="form-control" placeholder="Search" /> -->
+             <%= form_tag({ controller: "profiles" , action: "search" },:format => :js,:id => 'main_search' ,remote: true , method: "get"  ) do %>
+                    <%= text_field_tag :search_value, nil,  class: 'form-control' , :autocomplete => :off , :placeholder => "search here.." %>
+                    <%#= submit_tag 'Search', :class => 'btn btn-success' %>
+                <% end %>
+        </div>
+        <ul id="search_results">
+        </ul>
     </div>
     <script id="chat-window-template" type="text/x-handlebars-template">
         <div class="panel panel-default">
@@ -228,56 +132,17 @@
         <div class="cover profile">
             <div class="wrapper">
                 <div class="image">
-                    <img src="/assets/profile-cover.jpg" alt="people" />
+                    <img src="/assets/cover2.jpg" alt="people" style="width: 1200px; height: 333px;padding-right:0px;">
                 </div>
-                <ul class="friends">
-                    <li>
-                        <a href="#">
-                            <img src="/assets/guy-6.jpg" alt="people" class="img-responsive">
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#">
-                            <img src="/assets/woman-3.jpg" alt="people" class="img-responsive">
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#">
-                            <img src="/assets/guy-2.jpg" alt="people" class="img-responsive">
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#">
-                            <img src="/assets/guy-9.jpg" alt="people" class="img-responsive">
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#">
-                            <img src="/assets/woman-9.jpg" alt="people" class="img-responsive">
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#">
-                            <img src="/assets/guy-4.jpg" alt="people" class="img-responsive">
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#">
-                            <img src="/assets/guy-1.jpg" alt="people" class="img-responsive">
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#">
-                            <img src="/assets/woman-4.jpg" alt="people" class="img-responsive">
-                        </a>
-                    </li>
+                <ul class="friends" style="width: 0px;height: 0px;">
                     <li><a href="#" class="group"><i class="fa fa-group"></i></a>
                     </li>
-                </ul>
+                </ul> 
             </div>
             <div class="cover-info">
                 <div class="avatar">
-                    <img src="/assets/guy-5.jpg" alt="people" />
+                    <!-- <img src="/assets/guy-5.jpg" alt="people" /> -->
+                    <%= image_tag @profile.try(:avatar) , class: "img-circle", :width => "40px",height: "40px" %>
                 </div>
                 <div class="name">
                     <a href="#">
@@ -285,16 +150,22 @@
             		</a>
                 </div>
                 <ul class="cover-nav">
-                    <li><a href="index.html"><i class="fa fa-fw icon-ship-wheel"></i> Timeline</a>
+                    <li><!-- <a href="index.html"><i class="fa fa-fw icon-ship-wheel"></i> Timeline</a> -->
+                        <%= link_to "profile " , @profile %>
+                    </li> 
+
+                    <li>
+                        <%= link_to "Universities", followables_profile_path(current_user.profile.id) %>
                     </li>
-                    <li><a href="user-public-profile.html"><i class="fa fa-fw icon-user-1"></i> About</a>
+                    <!-- <li>
                     </li>
                     <li><a href="user-public-users.html"><i class="fa fa-fw fa-users"></i> Friends</a>
-                    </li>
+                    </li> -->
                 </ul>
             </div>
         </div>
         <div class="timeline row" data-toggle="gridalicious">
+            <% if current_user.id==@profile.user.id %>
             <div class="timeline-block">
                 <div class="panel panel-default share">
                     <div class="panel-heading panel-heading-gray title">
@@ -309,7 +180,7 @@
                         
                     </div>
                     <div class="panel-footer share-buttons">
-                        <a href="#">
+                        <!-- <a href="#">
                             <i class="fa fa-map-marker"></i>
                         </a>
                         <a href="#">
@@ -317,35 +188,81 @@
                         </a>
                         <a href="#">
                             <i class="fa fa-video-camera"></i>
-                        </a>
+                        </a> -->
                         <%#= submit_tag "post" , :class => "btn btn-primary btn-xs pull-right"%>
                         <button type="submit" class="btn btn-primary btn-xs pull-right display-none">Post</button>
                         <% end %>
                     </div>
                 </div>
             </div>
+            <% end %>
+            
 
             <%#= render 'timeBlock' %>
 
-            <% @posts.each do |post| %>
+            <%# @posts.each do |post| %>
             	<%#= render :partial => 'profiles/timeBlock', :object => post %>
-            	<%= render :partial => "timeBlock", :locals => {:post => post} %>
-            <% end if @posts.present? %>
-
+            	<%#= render :partial => "timeBlock", :locals => {:post => post} %>
+            <%# end if @posts.present? %>
+            
+            <% if current_user.id==@profile.user.id %>
+                <% if @followeesposts.present? %>
+                    <% @followeesposts.each do |post| %>
+                        <%= render :partial => "timeBlock", :locals => {:post => post} %>
+                    <% end  %>
+                <% end %>
+            <% else %>
+                <% if @profile_posts.present? %>
+                    <% @profile_posts.each do |post| %>
+                        <%= render :partial => "timeBlock", :locals => {:post => post} %>
+                    <% end  %>
+                <% end %>
+            <% end %>
+            
         </div>
     </div>
 
-    <!-- Footer -->
-    <div class="footer">
-        Social Network Template &copy; Copyright Notice
-    </div>
 
-    <!-- // Footer -->
-    
-    <!-- Vendor Scripts Bundle -->
-    <script src="/assets/vendor.min.js"></script>
 
-    <!-- App Scripts Bundle -->
-    <script src="/assets/scripts.min.js"></script>
-
+<!-- <li>
+    <a href="#">
+        <img src="/assets/guy-6.jpg" alt="people" class="img-responsive">
+    </a>
+</li>
+<li>
+    <a href="#">
+        <img src="/assets/woman-3.jpg" alt="people" class="img-responsive">
+    </a>
+</li>
+<li>
+    <a href="#">
+        <img src="/assets/guy-2.jpg" alt="people" class="img-responsive">
+    </a>
+</li>
+<li>
+    <a href="#">
+        <img src="/assets/guy-9.jpg" alt="people" class="img-responsive">
+    </a>
+</li>
+<li>
+    <a href="#">
+        <img src="/assets/woman-9.jpg" alt="people" class="img-responsive">
+    </a>
+</li>
+<li>
+    <a href="#">
+        <img src="/assets/guy-4.jpg" alt="people" class="img-responsive">
+    </a>
+</li>
+<li>
+    <a href="#">
+        <img src="/assets/guy-1.jpg" alt="people" class="img-responsive">
+    </a>
+</li>
+<li>
+    <a href="#">
+        <img src="/assets/woman-4.jpg" alt="people" class="img-responsive">
+    </a>
+</li>
+ -->
 

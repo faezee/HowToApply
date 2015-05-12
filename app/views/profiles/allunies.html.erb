@@ -1,0 +1,150 @@
+
+
+  
+    <script id="chat-window-template" type="text/x-handlebars-template">
+        <div class="panel panel-default">
+            <div class="panel-heading" data-toggle="chat-collapse" data-target="#chat-bill">
+                <a href="#" class="close"><i class="fa fa-times"></i></a>
+                <a href="#">
+                    <img src="{{ user_image }}" width="40" class="pull-left">
+                    <span class="contact-name">{{user}}</span>
+                </a>
+            </div>
+            <div class="panel-body" id="chat-bill">
+                <div class="media">
+                    <div class="pull-left">
+                        <img src="{{ user_image }}" width="25" class="img-circle" alt="people" />
+                    </div>
+                    <div class="media-body">
+                        <span class="message">Feeling Groovy?</span>
+                    </div>
+                </div>
+                <div class="media right">
+                    <div class="pull-right">
+                        <img src="{{ user_image }}" width="25" class="img-circle" alt="people" />
+                    </div>
+                    <div class="media-body">
+                        <span class="message">Yep.</span>
+                    </div>
+                </div>
+                <div class="media">
+                    <div class="pull-left">
+                        <img src="{{ user_image }}" width="25" class="img-circle" alt="people" />
+                    </div>
+                    <div class="media-body">
+                        <span class="message">This chat window looks amazing.</span>
+                    </div>
+                </div>
+                <div class="media right">
+                    <div class="pull-right">
+                        <img src="{{ user_image }}" width="25" class="img-circle" alt="people" />
+                    </div>
+                    <div class="media-body">
+                        <span class="message">Thanks!</span>
+                    </div>
+                </div>
+            </div>
+            <input type="text" class="form-control" placeholder="Type message..." />
+        </div>
+    </script>
+    <div class="chat-window-container"></div>
+    <div class="container">
+        <div class="cover profile">
+            <div class="wrapper">
+                <div class="image">
+                    <img src="/assets/url.jpg" alt="people" />
+                </div>
+                <ul class="friends">
+                    <li>
+                        <a href="#">
+                            <img src="/assets/jabedar.jpg" alt="people" class="img-responsive">
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <img src="/assets/rashed.jpg" alt="people" class="img-responsive">
+                        </a>
+                    </li>
+                    
+                      <!--  <a href="#">
+                            <img src="/assets/picture-73.jpg" alt="people" class="img-responsive">
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <img src="/assets/hashemi.jpg" alt="people" class="img-responsive">
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <img src="/assets/guy-1.jpg" alt="people" class="img-responsive">
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <img src="/assets/woman-4.jpg" alt="people" class="img-responsive">
+                        </a>
+                    </li>-->
+                    <li><a href="#" class="group"><i class="fa fa-group"></i></a>
+                    </li>
+                </ul>
+            </div>
+            <div class="cover-info">
+                <div class="avatar">
+                    <img src="/assets/logo.png" alt="people" />
+                </div>
+                <div class="name">
+                    <a href="#">
+                <%= @uni.name %> <%= @uni.id %>
+            </a>
+                </div>
+                <ul class="cover-nav">
+                    
+                    <li>
+                    <% if @page_follows.where("folowee_id=? and folower_id=? and folowee_type=?",@uni.id, current_user.id, "Uni").present? %>
+    					<% folow_del= @page_follows.where("folowee_id=? and folower_id=? and folowee_type=?",@uni.id, current_user.id, "Uni").first %>
+    					<a href='/page_follows/<%=folow_del.id%>?followee_id=<%=@uni.id%>'  data-method='delete'>unfollow</a> 
+					<% else %>
+						<a href='/page_follows?followee_id=<%=@uni.id%>'  data-method='post'>follow</a> 
+					<% end %>
+					</li>
+                    <!-- <li><a href="user-public-profile.html"><i class="fa fa-fw icon-user-1"></i> About</a> -->
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="timeline row" data-toggle="gridalicious">
+        	<% if current_user.id==1 %>
+            <div class="timeline-block">
+                <div class="panel panel-default share">
+                    <div class="panel-heading panel-heading-gray title">
+                        What&acute;s new
+                    </div>
+                    <div class="panel-body">
+                    	<%= form_tag("/posts") do  %>
+                    	<%= hidden_field_tag 'post[postable_type]', "Uni" %> 
+    					<%= hidden_field_tag 'post[postable_id]', @uni.id.to_s %>
+                        <textarea name="post[content]" class="form-control share-text" rows="3" placeholder="Share your status..."></textarea>
+                    </div>
+                    <div class="panel-footer share-buttons">
+                        
+                        <button type="submit" class="btn btn-primary btn-xs pull-right display-none">Post</button>
+                        
+                        <% end %>
+                    </div>
+                </div>
+            </div>
+            <% end %>
+            
+            <% Post.where(:postable_type => 'Uni', :postable_id => @uni.id).each do |post| %>
+            	<%= render :partial => "timeBlockUni", :locals => {:post => post} %>
+            <% end %>
+
+
+
+             
+
+            
+        </div>
+    </div>
+

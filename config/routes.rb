@@ -1,6 +1,10 @@
 Rails.application.routes.draw do
   
 
+  resources :page_follows
+
+  resources :notifications
+
   resources :app_infos
 
   resources :plans
@@ -29,20 +33,22 @@ Rails.application.routes.draw do
   
   # profile folder routes
   
+  get 'profiles/search'
+
   resources :profiles do
-    collection do
-      post 'search' 
-    end
     member do 
       get 'showTimeLine'
+      get 'notification'
+      get 'followables'
+      get 'allunies'
+      
     end
-
   end
 
   devise_for :users
 
 
-  root to: 'homepage#index'
+  root to: 'profiles#showTimeLine'
   
   # mailbox folder routes
   get "mailbox/inbox" => "mailbox#inbox", as: :mailbox_inbox

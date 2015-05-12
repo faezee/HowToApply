@@ -12,7 +12,14 @@
   <% end %>
 
   <%= f.hidden_field :parent_id %> 
-  
+  <% if postable.nil? %>
+    <%= f.hidden_field :postable_type, :value => "User" %> 
+    <%= f.hidden_field :postable_id, :value => current_user.id.to_s %> 
+  <% else %>
+    <%= f.hidden_field :postable_type, :value => postable.class.to_s %> 
+    <%= f.hidden_field :postable_id, :value => postable.id.to_s %> 
+  <% end %>
+
   <div class="field">
     <% f.label :user_id %><br>
     <%= f.hidden_field :user_id  , :value => current_user.id %>
@@ -24,4 +31,5 @@
   <div class="actions">
     <%= f.submit %>
   </div>
+
 <% end %>

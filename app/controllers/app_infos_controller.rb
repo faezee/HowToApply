@@ -24,17 +24,22 @@ class AppInfosController < ApplicationController
   # POST /app_infos
   # POST /app_infos.json
   def create
-    @app_info = AppInfo.new(app_info_params)
+    @app_info = AppInfo.new
 
-    respond_to do |format|
-      if @app_info.save
-        format.html { redirect_to @app_info, notice: 'App info was successfully created.' }
-        format.json { render :show, status: :created, location: @app_info }
-      else
-        format.html { render :new }
-        format.json { render json: @app_info.errors, status: :unprocessable_entity }
-      end
-    end
+    @plan = Plan.where("degree_id=? and uni_id=? and field_id=?", params[:app_info][:degree_id], params[:app_info][:uni_id], params[:app_info][:field_id]).first
+
+
+    @app_info.plan_id=@plan.id
+    @app_info.profile_id=current_user.profile.id
+    #@app_info.professer_id=Professer.find_by_name(params[:prof_name]).id
+    @app_info.professer_id=Professer.where("id=?", params[:app_info][:professer_id]).first.id
+    # @app_info.professer_id=Professer.find(params[:app_info][:professer_id).id
+
+      @app_info.save
+        
+      redirect_to :back
+      
+        
   end
 
   # PATCH/PUT /app_infos/1
@@ -69,6 +74,6 @@ class AppInfosController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def app_info_params
-      params.require(:app_info).permit(:plan_id, :profile_id, :acc_or_rej, :professer_id)
+      params.require(:app_info).permit(:plan_id, :profile_id, :acc_or_rej)
     end
 end

@@ -10,6 +10,7 @@ class UnisController < ApplicationController
   # GET /unis/1
   # GET /unis/1.json
   def show
+    @page_follows = PageFollow.all
   end
 
   # GET /unis/new

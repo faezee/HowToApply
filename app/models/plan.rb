@@ -6,5 +6,5 @@ class Plan < ActiveRecord::Base
   belongs_to :semester
 
   has_many :app_infos
-
+  
 end

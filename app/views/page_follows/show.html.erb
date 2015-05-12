@@ -1,0 +1,24 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Folowee type:</strong>
+  <%= @page_follow.folowee_type %>
+</p>
+
+<p>
+  <strong>Folowee:</strong>
+  <%= @page_follow.folowee_id %>
+</p>
+
+<p>
+  <strong>Folower type:</strong>
+  <%= @page_follow.folower_type %>
+</p>
+
+<p>
+  <strong>Folower:</strong>
+  <%= @page_follow.folower_id %>
+</p>
+
+<%= link_to 'Edit', edit_page_follow_path(@page_follow) %> |
+<%= link_to 'Back', page_follows_path %>

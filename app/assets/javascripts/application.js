@@ -16,8 +16,17 @@
 //= require jquery_ujs
 //= require chosen-jquery
 //= require turbolinks
-//= require_tree
+
 //= require rails-timeago
+
+
+$(document).ready(function() {
+	$('#main_search #search_value').keyup(function (e) {
+		$.get($("#main_search").attr("action"), $("#main_search").serialize(), null, 'script');
+		return false;
+	});
+});
+
 
 
 
